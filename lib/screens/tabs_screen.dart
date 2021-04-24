@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/screens/favorites_screen.dart';
+import './favorites_screen.dart';
 
 import './categories_screen.dart';
 
