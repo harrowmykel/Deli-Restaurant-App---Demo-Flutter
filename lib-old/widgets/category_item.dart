@@ -1,41 +1,35 @@
 import 'package:flutter/material.dart';
-
-import '../screens/category_meals_screen.dart';
+import '../models/category.dart';
+import '../screens/category_meal.dart';
 
 class CategoryItem extends StatelessWidget {
-  final String id;
-  final String title;
-  final Color color;
+  final Category category;
 
-  CategoryItem(this.id, this.title, this.color);
+  const CategoryItem({
+    this.category,
+  });
 
-  void selectCategory(BuildContext ctx) {
-    Navigator.of(ctx).pushNamed(
-      CategoryMealsScreen.routeName,
-      arguments: {
-        'id': id,
-        'title': title,
-      },
+  void _onCategorySelect(BuildContext context) {
+    Navigator.of(context).pushNamed(
+      CategoryMealScreen.routeName,
+      arguments: {'category': category},
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => selectCategory(context),
+      onTap: () => _onCategorySelect(context),
       splashColor: Theme.of(context).primaryColor,
       borderRadius: BorderRadius.circular(15),
       child: Container(
         padding: const EdgeInsets.all(15),
-        child: Text(
-          title,
-          style: Theme.of(context).textTheme.title,
-        ),
+        child: Text(category.title, style: Theme.of(context).textTheme.title),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              color.withOpacity(0.7),
-              color,
+              category.color.withOpacity(0.7),
+              category.color,
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
